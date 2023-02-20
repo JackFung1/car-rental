@@ -85,3 +85,6 @@ http://localhost:8081/carRental/admin/removeCar/6
 
 # Swagger UI URL
 http://localhost:8081/carRental/swagger-ui.html
+
+# Web Portal Client Demo
+http://localhost:8081/carRental/index.html

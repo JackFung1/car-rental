@@ -3,27 +3,38 @@
 ##################
 server:
   context-path: /carRental
-  port: 8081
+  port: 8080
 
 ########################
 #   Database Settings
 ########################
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:es-chanllenge;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#    platform: h2
+#    username: sa
+#    password:
+#    driverClassName: org.h2.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        use_sql_comments: true
+#        format_sql: true
+
+#数据库配置
 spring:
   datasource:
-    url: jdbc:h2:mem:es-chanllenge;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    platform: h2
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        show_sql: true
-        use_sql_comments: true
-        format_sql: true
+    url: jdbc:mysql://39.98.80.107:3306/car_rental?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false&verifyServerCertificate=false
+#    url: jdbc:mysql://127.0.0.1:3306/car_rental?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false&verifyServerCertificate=false
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
 
   ##################
   #   H2 Settings
@@ -35,3 +46,17 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+
+# Mybatis mapper 映射路径配置
+mybatis:
+  type-aliases-package: com.xiaour.spring.boot.mapper
+  mapper-locations: classpath*:mapper/*.xml
+  configLocation: classpath:mybatis-config.xml
+
+# 日志输出
+#logging:
+#  file: D:/boot.log
+#  level:
+#    com.ibatis:DEBUG
+#    root:DEBUG
+

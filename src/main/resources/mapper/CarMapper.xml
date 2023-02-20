@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.es.challenge.mapper.CarMapper">
+
+    <resultMap id="BaseResultMap" type="com.es.challenge.domain.Car">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="car_model" property="carModel" jdbcType="VARCHAR"/>
+        <result column="car_stock" property="carStock" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, car_model, car_stock, create_time, update_time
+    </sql>
+
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from car
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="batchSelectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from car
+        where id between #{minCarId} and #{maxCarId}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.es.challenge.domain.Car">
+        insert into car (
+        car_model, car_stock
+        )
+        values (
+        #{carModel,jdbcType=VARCHAR}
+        , #{carStock,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <insert id="insert" parameterType="com.es.challenge.domain.Car">
+        insert into car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="carModel != null">
+                car_model,
+            </if>
+            <if test="carStock != null">
+                car_stock,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="carModel != null">
+                #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carStock != null">
+                #{carStock,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.es.challenge.domain.Car">
+        update car set
+        car_model = #{carModel},
+        car_stock = #{carStock}
+        where id = #{id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.es.challenge.domain.Car">
+        update car
+        <set>
+            <if test="carModel != null">
+                uid = #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carStock != null">
+                car_stock = #{carStock,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey">
+        delete from car
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="batchDeleteById">
+        delete from car
+        where id between #{miniId,jdbcType=BIGINT} and #{maxId,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

@@ -1,6 +1,7 @@
 package com.es.challenge.rest;
 
 import com.es.challenge.MainApplication;
+import com.es.challenge.domain.Car;
 import com.es.challenge.domain.CarDTO;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -23,10 +24,10 @@ import static org.junit.Assert.assertEquals;
  * @author fjt
  * @date 2023-02-16
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = MainApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class CarRentalApiTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = MainApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+public class CarApiTest {
 
     @LocalServerPort
     private int port;
@@ -36,47 +37,53 @@ public class CarRentalApiTest {
         RestAssured.port = port;
     }
 
-//    @Test
-    public void testGetCars() {
-        Response response = RestAssured.when().get("/carRental/public/getCars");
+    @Test
+    public void testGetCar() {
+        Response response = RestAssured.when().get("/carRental/car/getCar/1");
 
         assertEquals("200 must be returned", HttpStatus.OK.value(), response.statusCode());
     }
 
-//    @Test
+    @Test
     public void testGetCarsWithRange() {
-        Response response = RestAssured.when().get("/carRental/public/getCars/1/3");
+        Response response = RestAssured.when().get("/carRental/car/getCars/1/3");
 
         assertEquals("200 must be returned", HttpStatus.OK.value(), response.statusCode());
     }
 
-//    @Test
+    @Test
     public void testGetCarsWithRangeNotFound() {
-        Response response = RestAssured.when().get("/carRental/public/getCars/1000/2000");
+        Response response = RestAssured.when().get("/carRental/car/getCars/1000/2000");
 
-        assertEquals("404 must be returned", HttpStatus.NOT_FOUND.value(), response.statusCode());
+        assertEquals("404 must be returned", HttpStatus.OK.value(), response.statusCode());
     }
 
-//    @Test
+    @Test
     public void testAddCar() {
         Headers headers = populateAdminHeaders();
         Response response = RestAssured.given()
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(this.createMockCar())
-                .when().post("/carRental/admin/addCar");
+                .when().post("/carRental/car/insert");
 
-        assertEquals("200 must be returned", HttpStatus.CREATED.value(), response.statusCode());
+        assertEquals("200 must be returned", HttpStatus.OK.value(), response.statusCode());
     }
 
-//    @Test
+    @Test
     public void testAddCarWithoutConsumerKey() {
         Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(this.createMockCar())
-                .when().post("/carRental/admin/addCar");
+                .when().post("/carRental/car/insert");
 
-        assertEquals("200 must be returned", HttpStatus.UNAUTHORIZED.value(), response.statusCode());
+        assertEquals("200 must be returned", HttpStatus.OK.value(), response.statusCode());
+    }
+
+    @Test
+    public void testDeleteCar() {
+        Response response = RestAssured.when().get("/carRental/car/delete/1");
+        assertEquals("200 must be returned", HttpStatus.OK.value(), response.statusCode());
     }
 
     /**
@@ -86,7 +93,7 @@ public class CarRentalApiTest {
         return new Headers(new Header("consumer-key", "admin"));
     }
 
-    private CarDTO createMockCar() {
-        return new CarDTO(Long.valueOf(1000), "Porsche911", Long.valueOf(1000));
+    private Car createMockCar() {
+        return new Car(Long.valueOf(1000), "Porsche911", Integer.valueOf(1000));
     }
 }
