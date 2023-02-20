@@ -10,7 +10,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.es.challenge.CommonConstant;
+import com.es.challenge.constants.CommonConstant;
 
 import lombok.extern.slf4j.Slf4j;
 

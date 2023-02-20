@@ -1,6 +1,6 @@
 package com.es.challenge.controller.impl;
 
-import com.es.challenge.domain.CarDTO;
+import com.es.challenge.entity.CarDTO;
 import com.es.challenge.controller.CarRentalApi;
 import com.es.challenge.service.CarRentalService;
 import org.springframework.beans.factory.annotation.Autowired;

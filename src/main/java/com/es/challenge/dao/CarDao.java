@@ -1,6 +1,6 @@
 package com.es.challenge.dao;
 
-import com.es.challenge.domain.CarEntity;
+import com.es.challenge.entity.CarEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

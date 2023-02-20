@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.es.challenge.mapper.CarMapper">
 
-    <resultMap id="BaseResultMap" type="com.es.challenge.domain.Car">
+    <resultMap id="BaseResultMap" type="com.es.challenge.entity.Car">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="car_model" property="carModel" jdbcType="VARCHAR"/>
         <result column="car_stock" property="carStock" jdbcType="INTEGER"/>
@@ -29,7 +29,7 @@
         where id between #{minCarId} and #{maxCarId}
     </select>
 
-    <insert id="insertSelective" parameterType="com.es.challenge.domain.Car">
+    <insert id="insertSelective" parameterType="com.es.challenge.entity.Car" useGeneratedKeys="true" keyProperty="id" keyColumn = "id">
         insert into car (
         car_model, car_stock
         )
@@ -39,7 +39,7 @@
         )
     </insert>
 
-    <insert id="insert" parameterType="com.es.challenge.domain.Car">
+    <insert id="insert" parameterType="com.es.challenge.entity.Car">
         insert into car
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -65,14 +65,14 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKey" parameterType="com.es.challenge.domain.Car">
+    <update id="updateByPrimaryKey" parameterType="com.es.challenge.entity.Car">
         update car set
         car_model = #{carModel},
         car_stock = #{carStock}
         where id = #{id}
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.es.challenge.domain.Car">
+    <update id="updateByPrimaryKeySelective" parameterType="com.es.challenge.entity.Car">
         update car
         <set>
             <if test="carModel != null">

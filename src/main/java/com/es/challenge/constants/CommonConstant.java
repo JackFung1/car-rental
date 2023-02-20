@@ -1,4 +1,4 @@
-package com.es.challenge;
+package com.es.challenge.constants;
 
 import java.text.SimpleDateFormat;
 

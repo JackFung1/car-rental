@@ -1,7 +1,7 @@
 package com.es.challenge.dao.impl;
 
 import com.es.challenge.dao.CarDao;
-import com.es.challenge.domain.CarEntity;
+import com.es.challenge.entity.CarEntity;
 import com.es.challenge.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

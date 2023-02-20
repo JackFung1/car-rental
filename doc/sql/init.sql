@@ -26,7 +26,8 @@ CREATE TABLE `car` (
     `car_stock` int NOT NULL COMMENT 'car stock number',
     `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-     PRIMARY KEY (`id`)
+     PRIMARY KEY (`id`),
+     UNIQUE KEY `car_model`(`car_model`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='car info';
 
 

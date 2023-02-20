@@ -1,7 +1,7 @@
 package com.es.challenge.service.impl;
 
 
-import com.es.challenge.domain.Car;
+import com.es.challenge.entity.Car;
 import com.es.challenge.mapper.CarMapper;
 import com.es.challenge.service.CarService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,36 +24,36 @@ public class CarServiceImpl implements CarService {
     private CarMapper carMapper;
 
     @Override
-    public Car selectById(long id) throws Exception {
+    public Car selectById(long id) {
         return carMapper.selectById(id);
     }
 
     @Override
-    public List<Car> batchSelectById(long minCarId, long maxCarId) throws Exception{
-        return carMapper.batchSelectById(minCarId,maxCarId);
+    public List<Car> batchSelectById(long minCarId, long maxCarId) {
+        return carMapper.batchSelectById(minCarId, maxCarId);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int insertSelective(Car car) throws Exception {
+    public long insertSelective(Car car) {
         return carMapper.insertSelective(car);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int updateByPrimaryKey(Car car) throws Exception {
+    public int updateByPrimaryKey(Car car) {
         return carMapper.updateByPrimaryKey(car);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int deleteByPrimaryKey(long id) throws Exception {
+    public int deleteByPrimaryKey(long id) {
         return carMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int batchDeleteById(long minId, long maxId) throws Exception{
+    public int batchDeleteById(long minId, long maxId) {
         return carMapper.batchDeleteById(minId, maxId);
     }
 

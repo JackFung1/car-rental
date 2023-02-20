@@ -1,4 +1,4 @@
-package com.es.challenge.domain;
+package com.es.challenge.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

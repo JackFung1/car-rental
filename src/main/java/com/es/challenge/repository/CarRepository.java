@@ -1,6 +1,6 @@
 package com.es.challenge.repository;
 
-import com.es.challenge.domain.CarEntity;
+import com.es.challenge.entity.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

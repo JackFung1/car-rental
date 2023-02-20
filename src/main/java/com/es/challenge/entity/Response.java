@@ -1,4 +1,4 @@
-package com.es.challenge.domain;
+package com.es.challenge.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

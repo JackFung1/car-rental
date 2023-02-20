@@ -1,7 +1,7 @@
 package com.es.challenge.service;
 
 
-import com.es.challenge.domain.Car;
+import com.es.challenge.entity.Car;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface CarService {
      * @return
      * @throws Exception
      */
-    Car selectById(long id) throws Exception;
+    Car selectById(long id);
 
     /**
      * @param minCarId
@@ -24,28 +24,28 @@ public interface CarService {
      * @return
      * @throws Exception
      */
-    List<Car> batchSelectById(long minCarId, long maxCarId) throws Exception;
+    List<Car> batchSelectById(long minCarId, long maxCarId);
 
     /**
      * @param car
      * @return
      * @throws Exception
      */
-    int insertSelective(Car car) throws Exception;
+    long insertSelective(Car car);
 
     /**
      * @param car
      * @return
      * @throws Exception
      */
-    int updateByPrimaryKey(Car car) throws Exception;
+    int updateByPrimaryKey(Car car);
 
     /**
      * @param id
      * @return
      * @throws Exception
      */
-    int deleteByPrimaryKey(long id) throws Exception;
+    int deleteByPrimaryKey(long id);
 
     /**
      * @param minId
@@ -53,6 +53,6 @@ public interface CarService {
      * @return
      * @throws Exception
      */
-    int batchDeleteById(long minId, long maxId) throws Exception;
+    int batchDeleteById(long minId, long maxId);
 
 }

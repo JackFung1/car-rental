@@ -1,6 +1,6 @@
 package com.es.challenge.service;
 
-import com.es.challenge.domain.CarDTO;
+import com.es.challenge.entity.CarDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

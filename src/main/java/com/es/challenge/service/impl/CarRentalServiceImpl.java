@@ -1,8 +1,8 @@
 package com.es.challenge.service.impl;
 
 import com.es.challenge.dao.CarDao;
-import com.es.challenge.domain.CarDTO;
-import com.es.challenge.domain.CarEntity;
+import com.es.challenge.entity.CarDTO;
+import com.es.challenge.entity.CarEntity;
 import com.es.challenge.service.CarRentalService;
 import com.es.challenge.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
