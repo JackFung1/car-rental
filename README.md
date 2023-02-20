@@ -17,11 +17,13 @@ This project is built as an example for any one to would like to have a base to 
 
 Get car Request:  POST METHOD
 http://39.98.80.107:8080/carRental/car/getCar
+
+Request Body:
 {
 "id": 2
 }
 
-Response:
+Response Body:
 {
 "ret": true,
 "code": "SUCCESS",
@@ -37,12 +39,14 @@ Response:
 
 batch get cars Request: POST METHOD
 http://39.98.80.107:8080/carRental/car/getCars
+
+Request Body:
 {
 "minId": 1,
 "maxId": 10
 }
 
-Response:
+Response Body:
 {
 "ret": true,
 "code": "SUCCESS",
