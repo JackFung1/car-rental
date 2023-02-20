@@ -15,6 +15,9 @@ This project is built as an example for any one to would like to have a base to 
 
 # Test Cases
 
+Rest请求入口:
+CarRentalController
+
 # Get Api example
 
 Get car Request:  POST METHOD
