@@ -200,3 +200,8 @@ http://39.98.80.107:8080/carRental/index.html
 # Aliyun Instance
 
 ![aliyun_instance](doc/images/aliyun_instance.png)
+
+# Swagger UI
+![swagger-ui](doc/images/swagger-ui.png)
+
+
