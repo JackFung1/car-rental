@@ -159,7 +159,7 @@ public class CarRentalController {
      * @param deleteCarReq
      * @return
      */
-    @DeleteMapping("/car/delete")
+    @PostMapping("/car/delete")
     @ApiOperation(value = "Remove an existing Car", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The car has been removed successfully"),})
     public MsgResponse<Integer> deleteById(@RequestBody DeleteCarReq deleteCarReq) {
