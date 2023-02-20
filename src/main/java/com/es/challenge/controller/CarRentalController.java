@@ -70,7 +70,7 @@ public class CarRentalController {
      * @param req
      * @return
      */
-    @PostMapping("/car/getCars/{minCarId}/{maxCarId}")
+    @PostMapping("/car/getCars")
     @ApiOperation(value = "Return all Cars with details by car id range", notes = "This is a public API", response = List.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success"), @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Not found any car by carIds range")})
     public MsgResponse<List<CarVO>> getCarsByRange(@RequestBody QueryCarReq req) {
@@ -159,7 +159,7 @@ public class CarRentalController {
      * @param deleteCarReq
      * @return
      */
-    @DeleteMapping("/car/delete/{id}")
+    @DeleteMapping("/car/delete")
     @ApiOperation(value = "Remove an existing Car", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The car has been removed successfully"),})
     public MsgResponse<Integer> deleteById(@RequestBody DeleteCarReq deleteCarReq) {
@@ -175,7 +175,7 @@ public class CarRentalController {
      * @param deleteCarReq
      * @return
      */
-    @PostMapping("/car/batchDelete/{minId}/{maxId}")
+    @PostMapping("/car/batchDelete")
     @ApiOperation(value = "Remove existing Cars", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The cars have been removed successfully"),})
     public MsgResponse<Integer> batchDeleteById(@RequestBody DeleteCarReq deleteCarReq) {
