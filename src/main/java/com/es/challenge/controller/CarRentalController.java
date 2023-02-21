@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -116,6 +117,7 @@ public class CarRentalController {
     @PostMapping("/car/insert")
     @ApiOperation(value = "Add a new Car with details", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "A new car has been added successfully"),})
+    @Scope("Prototype")
     public MsgResponse<Car> createCar(@RequestBody CreateCarReq createCarReq) {
         AppAssert.notNull(createCarReq.getCarModel(), "car model不能为空");
         AppAssert.notNull(createCarReq.getCarStock(), "car stock不能为空");
@@ -136,23 +138,20 @@ public class CarRentalController {
     @PostMapping("/car/update")
     @ApiOperation(value = "update an existing Car", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The car has been updated successfully"),})
-    public MsgResponse<Car> update(@RequestBody UpdateCarReq updateCarReq) {
+    @Scope("Prototype")
+    public MsgResponse<Integer> update(@RequestBody UpdateCarReq updateCarReq) {
         AppAssert.notNull(updateCarReq.getId(), "car id不能为空");
         AppAssert.greaterOrEqualLong(updateCarReq.getId(), 0L, "car id should >=0");
         AppAssert.notNull(updateCarReq.getCarModel(), "car model不能为空");
         AppAssert.notNull(updateCarReq.getCarStock(), "car stock不能为空");
         log.info("update updateCarReq:" + JSON.toJSONString(updateCarReq));
-        Car carResult = carService.selectById(updateCarReq.getId());
-        if (carResult == null) {
-            log.info("error: not exist");
-            return new MsgResponse<>(null);
-        }
 
-        carResult.setCarModel(updateCarReq.getCarModel());
-        carResult.setCarStock(updateCarReq.getCarStock());
-        int updateRows = carService.updateByPrimaryKey(carResult);
-        log.info("updateRows:" + updateRows + " carResult:" + JSON.toJSONString(carResult));
-        return new MsgResponse<>(carResult);
+        int updateRows = carService.updateByPrimaryKey(updateCarReq);
+        if (updateRows == -1) {
+            return new MsgResponse<>("NOT_EXIST", "car not exist");
+        }
+        log.info("updateRows:" + updateRows);
+        return new MsgResponse<>(updateRows);
     }
 
     /**
@@ -162,6 +161,7 @@ public class CarRentalController {
     @PostMapping("/car/delete")
     @ApiOperation(value = "Remove an existing Car", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The car has been removed successfully"),})
+    @Scope("Prototype")
     public MsgResponse<Integer> deleteById(@RequestBody DeleteCarReq deleteCarReq) {
         AppAssert.notNull(deleteCarReq.getId(), "car id不能为空");
         AppAssert.greaterOrEqualLong(deleteCarReq.getId(), 0L, "car id should >=0");
@@ -178,6 +178,7 @@ public class CarRentalController {
     @PostMapping("/car/batchDelete")
     @ApiOperation(value = "Remove existing Cars", notes = "This is a public API with admin right", response = Response.class)
     @ApiResponses(value = {@ApiResponse(code = HttpServletResponse.SC_OK, message = "The cars have been removed successfully"),})
+    @Scope("Prototype")
     public MsgResponse<Integer> batchDeleteById(@RequestBody DeleteCarReq deleteCarReq) {
         AppAssert.notNull(deleteCarReq.getMinId(), "car minId不能为空");
         AppAssert.notNull(deleteCarReq.getMaxId(), "car maxId不能为空");

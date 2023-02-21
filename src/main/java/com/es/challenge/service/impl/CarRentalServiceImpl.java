@@ -22,11 +22,11 @@ public class CarRentalServiceImpl implements CarRentalService {
     private CarDao carDao;
 
     @Autowired
-    private CommonUtils calorieTrackingUtils;
+    private CommonUtils commonUtils;
 
     @Override
     public Boolean addCar(CarDTO carDTO) {
-        return this.carDao.addCar(this.calorieTrackingUtils.map(carDTO, CarEntity.class));
+        return this.carDao.addCar(this.commonUtils.map(carDTO, CarEntity.class));
     }
 
     @Override
@@ -38,21 +38,21 @@ public class CarRentalServiceImpl implements CarRentalService {
     public List<CarDTO> getCars() {
         List<CarEntity> cars = this.carDao.getCars();
 
-        return calorieTrackingUtils.mapList(cars, CarDTO.class);
+        return commonUtils.mapList(cars, CarDTO.class);
     }
 
     @Override
     public List<CarDTO> getCars(Long carMinId, Long carMaxId) {
         List<CarEntity> cars = this.carDao.getCars(carMinId, carMaxId);
 
-        return calorieTrackingUtils.mapList(cars, CarDTO.class);
+        return commonUtils.mapList(cars, CarDTO.class);
     }
 
     @Override
     public CarDTO getCarById(Long carId) {
         CarEntity car = this.carDao.getCarById(carId);
 
-        return calorieTrackingUtils.map(car, CarDTO.class);
+        return commonUtils.map(car, CarDTO.class);
     }
 
 }

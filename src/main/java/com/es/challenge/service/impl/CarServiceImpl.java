@@ -1,7 +1,9 @@
 package com.es.challenge.service.impl;
 
 
+import com.es.challenge.controller.request.UpdateCarReq;
 import com.es.challenge.entity.Car;
+import com.es.challenge.entity.MsgResponse;
 import com.es.challenge.mapper.CarMapper;
 import com.es.challenge.service.CarService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +43,16 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int updateByPrimaryKey(Car car) {
-        return carMapper.updateByPrimaryKey(car);
+    public int updateByPrimaryKey(UpdateCarReq updateCarReq) {
+        Car carResult = carMapper.selectById(updateCarReq.getId());
+        if (carResult == null) {
+            log.info("car id" + updateCarReq.getId() + " not exist");
+            return -1;
+        }
+
+        carResult.setCarModel(updateCarReq.getCarModel());
+        carResult.setCarStock(updateCarReq.getCarStock());
+        return carMapper.updateByPrimaryKey(carResult);
     }
 
     @Override

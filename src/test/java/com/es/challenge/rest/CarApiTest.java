@@ -120,7 +120,6 @@ public class CarApiTest {
         long insertSequence = 0L;
 
         try {
-
             CreateCarReq createCarReq = new CreateCarReq();
             createCarReq.setCarModel("Test990");
             createCarReq.setCarStock(50);
@@ -135,12 +134,10 @@ public class CarApiTest {
             updateCarReq.setCarModel("Test991");
             updateCarReq.setCarStock(msgResponse.getData().getCarStock());
             updateCarReq.setId(msgResponse.getData().getId());
-            MsgResponse<Car> updateResp = carRentalController.update(updateCarReq);
+            MsgResponse<Integer> updateResp = carRentalController.update(updateCarReq);
             Assert.assertNotNull(updateResp);
             Assert.assertNotNull(updateResp.getData());
-            Assert.assertEquals(Long.valueOf(insertSequence), updateResp.getData().getId());
-            Assert.assertEquals("Test991", updateResp.getData().getCarModel());
-            insertSequence = msgResponse.getData().getId();
+            Assert.assertTrue(updateResp.getData().intValue()>0);
         } finally {
             int deleteRows = carService.deleteByPrimaryKey(insertSequence);
             log.info("delete Rows:" + deleteRows + " insertSequence:" + insertSequence);

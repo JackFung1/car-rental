@@ -1,6 +1,7 @@
 package com.es.challenge.service;
 
 
+import com.es.challenge.controller.request.UpdateCarReq;
 import com.es.challenge.entity.Car;
 
 import java.util.List;
@@ -34,11 +35,11 @@ public interface CarService {
     long insertSelective(Car car);
 
     /**
-     * @param car
+     * @param updateCarReq
      * @return
      * @throws Exception
      */
-    int updateByPrimaryKey(Car car);
+    int updateByPrimaryKey(UpdateCarReq updateCarReq);
 
     /**
      * @param id
